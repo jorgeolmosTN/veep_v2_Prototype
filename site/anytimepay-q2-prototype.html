@@ -1,0 +1,347 @@
+<div id="ap-q2-prototype">
+  <style>
+    #ap-q2-prototype { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #3f4145; background: transparent; width: 100%; }
+    #ap-q2-prototype * { box-sizing: border-box; }
+    #ap-q2-prototype button, #ap-q2-prototype input, #ap-q2-prototype select { font: inherit; }
+    #ap-q2-prototype .demo-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; background: #eef5fb; border: 1px solid #c5d8ea; border-bottom: 0; border-radius: 12px 12px 0 0; color: #173c62; }
+    #ap-q2-prototype .demo-bar strong { font-weight: 500; }
+    #ap-q2-prototype .demo-bar label { display: flex; align-items: center; gap: 8px; }
+    #ap-q2-prototype .demo-bar select { border: 1px solid #8ba9c5; border-radius: 6px; background: #fff; color: #173c62; padding: 6px 28px 6px 8px; }
+    #ap-q2-prototype .shell { position: relative; min-height: 690px; overflow: hidden; background: #f5f5f5; border: 1px solid #d5d5d5; border-radius: 0 0 12px 12px; box-shadow: 0 8px 28px rgba(25, 45, 70, .10); }
+    #ap-q2-prototype .topbar { height: 76px; background: #fff; border-bottom: 1px solid #dedede; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+    #ap-q2-prototype .logo { display: flex; align-items: baseline; color: #073a79; font-family: Georgia, serif; font-size: 28px; font-style: italic; letter-spacing: -1px; }
+    #ap-q2-prototype .logo span { color: #bd1534; }
+    #ap-q2-prototype .member { text-align: right; color: #444; }
+    #ap-q2-prototype .member strong { display: block; font-weight: 500; }
+    #ap-q2-prototype .member small { color: #777; }
+    #ap-q2-prototype .main { padding: 22px; }
+    #ap-q2-prototype .back { appearance: none; border: 0; background: transparent; color: #0875bd; padding: 0; margin-bottom: 20px; cursor: pointer; }
+    #ap-q2-prototype .dashboard { display: grid; grid-template-columns: minmax(240px, .9fr) minmax(280px, 1.35fr); gap: 18px; }
+    #ap-q2-prototype .panel { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.14); padding: 20px; }
+    #ap-q2-prototype .panel h2 { margin: 0 0 18px; font-size: 21px; font-weight: 500; color: #3e4145; }
+    #ap-q2-prototype .account-row { padding: 14px 0; border-bottom: 1px solid #e3e3e3; }
+    #ap-q2-prototype .account-row:last-child { border-bottom: 0; }
+    #ap-q2-prototype .account-title { font-weight: 500; letter-spacing: .02em; }
+    #ap-q2-prototype .balance { font-size: 30px; font-weight: 500; color: #34373b; margin: 5px 0 1px; }
+    #ap-q2-prototype .balance-label { font-size: 12px; color: #717171; letter-spacing: .06em; }
+    #ap-q2-prototype .link-button { appearance: none; border: 0; background: transparent; color: #0875bd; padding: 8px 0 0; cursor: pointer; font-weight: 500; }
+    #ap-q2-prototype .anytime-row { position: relative; border: 2px solid #a8d4bd; border-radius: 9px; padding: 14px; margin-top: 14px; background: #f8fffb; }
+    #ap-q2-prototype .anytime-row .account-title { color: #075e35; }
+    #ap-q2-prototype .anytime-row > .ap-brand { position: absolute; top: 14px; right: 14px; }
+    #ap-q2-prototype .anytime-row > .tag { margin-left: 0; margin-right: 170px; }
+    #ap-q2-prototype .ap-brand { display: flex; align-items: center; gap: 9px; color: #124f3b; }
+    #ap-q2-prototype .ap-brand svg { width: 34px; height: 30px; flex: 0 0 auto; }
+    #ap-q2-prototype .ap-brand-text { font-size: 20px; font-weight: 500; letter-spacing: -.02em; }
+    #ap-q2-prototype .ap-brand-text em { color: #22b95e; font-style: normal; }
+    #ap-q2-prototype .ap-tagline { color: #20ad59; font-size: 12px; margin-top: 1px; }
+    #ap-q2-prototype .page-brand .ap-brand-text { font-size: 27px; font-weight: 400; }
+    #ap-q2-prototype .page-brand .ap-brand svg { width: 42px; height: 36px; }
+    #ap-q2-prototype .tag { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #e0f3e8; color: #075e35; font-size: 12px; margin-left: 7px; }
+    #ap-q2-prototype .service-card { display: flex; justify-content: space-between; align-items: center; gap: 18px; border: 1px solid #dcdcdc; border-radius: 9px; padding: 18px; margin-bottom: 14px; }
+    #ap-q2-prototype .service-card h3 { margin: 0 0 5px; font-size: 17px; font-weight: 500; color: #272a2e; }
+    #ap-q2-prototype .service-card p { margin: 0; color: #686b70; }
+    #ap-q2-prototype .primary, #ap-q2-prototype .secondary { border-radius: 5px; padding: 10px 16px; cursor: pointer; font-weight: 500; white-space: nowrap; }
+    #ap-q2-prototype .primary { border: 1px solid #006baa; background: #0876b9; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.16); }
+    #ap-q2-prototype .primary:disabled { background: #9da8b0; border-color: #9da8b0; cursor: default; }
+    #ap-q2-prototype .secondary { border: 1px solid #0876b9; background: #fff; color: #0876b9; }
+    #ap-q2-prototype .insight { border-left: 4px solid #1b8a55; background: #f1faf5; padding: 17px 18px; margin-top: 18px; }
+    #ap-q2-prototype .insight strong { display: block; color: #075e35; font-weight: 500; margin-bottom: 4px; }
+    #ap-q2-prototype .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding-bottom: 18px; }
+    #ap-q2-prototype .page-head h1 { font-size: 27px; font-weight: 400; margin: 0 0 6px; color: #3f4145; }
+    #ap-q2-prototype .updated { color: #666; font-size: 13px; }
+    #ap-q2-prototype .head-balance { text-align: right; min-width: 160px; }
+    #ap-q2-prototype .head-balance strong { display: block; font-size: 26px; font-weight: 500; color: #373a3d; }
+    #ap-q2-prototype .head-balance span { color: #6b6d70; }
+    #ap-q2-prototype .head-balance .primary { display: block; margin: 10px 0 0 auto; }
+    #ap-q2-prototype .tabs { display: flex; gap: 28px; border-bottom: 1px solid #d7d7d7; margin-bottom: 20px; }
+    #ap-q2-prototype .tab { appearance: none; border: 0; border-bottom: 4px solid transparent; background: transparent; padding: 12px 7px 10px; color: #444; cursor: pointer; }
+    #ap-q2-prototype .tab.active { color: #0875bd; border-bottom-color: #0875bd; }
+    #ap-q2-prototype .account-content { background: #fff; min-height: 420px; padding: 20px 22px; border-radius: 7px; }
+    #ap-q2-prototype .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 20px 42px; }
+    #ap-q2-prototype .metric label { display: block; font-weight: 500; margin-bottom: 5px; }
+    #ap-q2-prototype .metric span { color: #323438; }
+    #ap-q2-prototype .wellness-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; margin-bottom: 14px; }
+    #ap-q2-prototype .wellness-card { min-height: 178px; border: 1px solid #c9d9ce; border-radius: 9px; padding: 18px; background: #fbfffc; }
+    #ap-q2-prototype .outlook { display: grid; grid-template-columns: 116px 1fr; gap: 16px; align-items: center; }
+    #ap-q2-prototype .score-ring { width: 116px; height: 58px; position: relative; overflow: hidden; margin: auto; }
+    #ap-q2-prototype .score-ring:before { content: ''; position: absolute; width: 106px; height: 106px; border-radius: 50%; border: 10px solid #dfe7e2; border-top-color: #1d8b56; border-right-color: #1d8b56; transform: rotate(-45deg); top: 5px; left: 5px; }
+    #ap-q2-prototype .score-number { position: absolute; inset: 31px 0 auto; text-align: center; font-size: 25px; font-weight: 500; }
+    #ap-q2-prototype .outlook h3 { margin: 0 0 4px; font-size: 19px; font-weight: 500; color: #222; }
+    #ap-q2-prototype .outlook p { margin: 4px 0; color: #5d6264; }
+    #ap-q2-prototype .not-credit { font-size: 12px; color: #75797c; }
+    #ap-q2-prototype .nudge-card { position: relative; overflow: hidden; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+    #ap-q2-prototype .nudge-card h3 { margin: 0 0 7px; font-size: 19px; font-weight: 500; color: #222; }
+    #ap-q2-prototype .nudge-card p { margin: 0 0 8px; color: #4f5357; }
+    #ap-q2-prototype .nudge-card small { color: #686b70; margin-bottom: 9px; }
+    #ap-q2-prototype .nudge-card .primary { align-self: center; min-width: 150px; background: #bd1534; border-color: #bd1534; }
+    #ap-q2-prototype .nudge-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; color: #414141; }
+    #ap-q2-prototype .nudge-card > *:not(.nudge-path) { position: relative; z-index: 1; }
+    #ap-q2-prototype .faq-row { display: flex; align-items: center; gap: 10px; border: 1px solid #c8ddef; border-radius: 8px; padding: 11px 14px; margin-bottom: 18px; background: #fbfdff; color: #51565c; }
+    #ap-q2-prototype .faq-icon { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #063f7d; border-radius: 50%; color: #063f7d; font-weight: 500; }
+    #ap-q2-prototype .faq-row a { color: #4c5056; font-weight: 500; }
+    #ap-q2-prototype table { width: 100%; border-collapse: collapse; }
+    #ap-q2-prototype th { text-align: left; color: #686b70; font-weight: 400; padding: 10px; border-bottom: 2px solid #d7d7d7; }
+    #ap-q2-prototype td { padding: 15px 10px; border-bottom: 1px solid #dedede; vertical-align: top; }
+    #ap-q2-prototype td:last-child, #ap-q2-prototype th:last-child { text-align: right; }
+    #ap-q2-prototype .credit { color: #14843d; font-weight: 500; }
+    #ap-q2-prototype .debit { color: #333; font-weight: 500; }
+    #ap-q2-prototype .empty-state { text-align: center; padding: 58px 20px; color: #676b70; }
+    #ap-q2-prototype .empty-state h2 { color: #24272a; }
+    #ap-q2-prototype .nudge { max-width: 620px; margin: 0 auto; text-align: center; }
+    #ap-q2-prototype .nudge-mark { font-size: 40px; color: #6844a7; margin: 8px; }
+    #ap-q2-prototype .nudge h1 { font-weight: 400; color: #29272c; }
+    #ap-q2-prototype .nudge p { color: #626067; }
+    #ap-q2-prototype .nudge-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0; text-align: left; }
+    #ap-q2-prototype .nudge-tools div { border: 1px solid #ddd5eb; border-radius: 8px; padding: 15px; background: #fcfaff; }
+    #ap-q2-prototype .nudge-tools strong { display: block; color: #4e347e; font-weight: 500; margin-bottom: 5px; }
+    #ap-q2-prototype .overlay { position: absolute; inset: 0; background: rgba(19, 30, 43, .42); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 5; }
+    #ap-q2-prototype .modal { width: min(520px, 100%); background: #fff; border-radius: 10px; box-shadow: 0 18px 60px rgba(0,0,0,.32); padding: 28px; }
+    #ap-q2-prototype .modal h2 { margin: 0 0 6px; font-size: 23px; font-weight: 500; color: #25282c; }
+    #ap-q2-prototype .modal > p { color: #64686c; margin: 0 0 20px; }
+    #ap-q2-prototype .steps { list-style: none; padding: 0; margin: 18px 0; }
+    #ap-q2-prototype .step { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: center; min-height: 45px; color: #75797d; }
+    #ap-q2-prototype .step-mark { width: 24px; height: 24px; border: 2px solid #b9bec2; border-radius: 50%; display: grid; place-items: center; font-size: 12px; }
+    #ap-q2-prototype .step.active { color: #075e35; font-weight: 500; }
+    #ap-q2-prototype .step.active .step-mark { border-color: #17844e; background: #e7f7ee; }
+    #ap-q2-prototype .step.done { color: #363a3e; }
+    #ap-q2-prototype .step.done .step-mark { border-color: #17844e; background: #17844e; color: #fff; }
+    #ap-q2-prototype .step.halted { color: #a32028; font-weight: 500; }
+    #ap-q2-prototype .step.halted .step-mark { border-color: #b6202b; background: #fff0f1; color: #a32028; }
+    #ap-q2-prototype .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    #ap-q2-prototype .support-box { background: #fff4f4; border-left: 4px solid #b6202b; padding: 13px 14px; color: #6d2529; margin-top: 15px; }
+    #ap-q2-prototype .support-box strong { display: block; font-weight: 500; margin-bottom: 3px; }
+    #ap-q2-prototype .transfer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+    #ap-q2-prototype .field label { display: block; color: #585c60; margin-bottom: 5px; }
+    #ap-q2-prototype .field input, #ap-q2-prototype .field select { width: 100%; padding: 10px; border: 1px solid #aeb4b9; border-radius: 5px; background: #fff; color: #2d3033; }
+    #ap-q2-prototype .success { text-align: center; }
+    #ap-q2-prototype .success-mark { display: inline-grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: #16844e; color: #fff; font-size: 28px; margin-bottom: 10px; }
+    #ap-q2-prototype .review-lines { border-top: 1px solid #d9dde0; border-bottom: 1px solid #d9dde0; margin: 16px 0; padding: 8px 0; }
+    #ap-q2-prototype .review-line { display: flex; justify-content: space-between; gap: 20px; padding: 7px 0; }
+    #ap-q2-prototype .review-line.total { font-weight: 500; border-top: 1px solid #d9dde0; margin-top: 5px; padding-top: 12px; }
+    #ap-q2-prototype .review-line.repayment-date { color: #5d6264; font-size: 14px; padding-top: 3px; }
+    #ap-q2-prototype .terms-check { display: grid; grid-template-columns: 20px 1fr; gap: 9px; align-items: start; margin: 14px 0; color: #42464a; }
+    #ap-q2-prototype .terms-check input { width: 18px; height: 18px; margin: 1px 0 0; }
+    #ap-q2-prototype .terms-check a { color: #0875bd; }
+    #ap-q2-prototype .success-banner { display: flex; align-items: center; gap: 10px; background: #ecf8f1; border-left: 4px solid #16844e; color: #075e35; padding: 12px 14px; margin-bottom: 14px; }
+    #ap-q2-prototype .success-banner span { flex: 1; }
+    #ap-q2-prototype .banner-close { appearance: none; border: 0; background: transparent; color: #075e35; cursor: pointer; font-size: 22px; padding: 0 2px; }
+    @media (max-width: 620px) {
+      #ap-q2-prototype .demo-bar, #ap-q2-prototype .topbar, #ap-q2-prototype .page-head { align-items: flex-start; }
+      #ap-q2-prototype .demo-bar, #ap-q2-prototype .page-head { flex-direction: column; }
+      #ap-q2-prototype .member { display: none; }
+      #ap-q2-prototype .dashboard { grid-template-columns: 1fr; }
+      #ap-q2-prototype .main { padding: 14px; }
+      #ap-q2-prototype .detail-grid, #ap-q2-prototype .transfer-grid, #ap-q2-prototype .nudge-tools, #ap-q2-prototype .wellness-grid { grid-template-columns: 1fr; }
+      #ap-q2-prototype .outlook { grid-template-columns: 1fr; text-align: center; }
+      #ap-q2-prototype .service-card { align-items: flex-start; flex-direction: column; }
+      #ap-q2-prototype .head-balance { text-align: left; }
+    }
+  </style>
+
+  <div class="demo-bar">
+    <strong>AnyTimePay SDK concept</strong>
+    <label>Explore scenario
+      <select id="ap-scenario">
+        <option value="first">First-time member</option>
+        <option value="returning">Returning member</option>
+        <option value="halted">Eligibility check halted</option>
+        <option value="nudge-after">Nudge Financial Wellness</option>
+      </select>
+    </label>
+  </div>
+  <section class="shell" aria-label="AltaOne digital banking prototype">
+    <header class="topbar">
+      <div class="logo" aria-label="AltaOne Federal Credit Union">Alta<span>One</span></div>
+      <div class="member"><strong>Good Morning, Paul Kelly Jr</strong><small>Last login: August 6, 2026 at 8:29 AM</small></div>
+    </header>
+    <main class="main" id="ap-main"></main>
+    <div id="ap-overlay"></div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('ap-q2-prototype');
+      var main = root.querySelector('#ap-main');
+      var overlay = root.querySelector('#ap-overlay');
+      var scenarioSelect = root.querySelector('#ap-scenario');
+      var state = { scenario: 'first', entitled: false, available: 143, outstanding: 40, ytd: 385, checking: 805.42, transferDone: false, view: 'home', tab: 'details', flash: false };
+      var labels = ['Updating account activity', 'Confirming earnings information', 'Calculating available earnings', 'Preparing your AnyTimePay account'];
+
+      function money(value) { return '$' + Number(value).toFixed(2); }
+      function accountBalanceMarkup(value) {
+        var amount = Number(value).toFixed(2).split('.');
+        return '$' + Number(amount[0]).toLocaleString('en-US') + '<sup>' + amount[1] + '</sup>';
+      }
+      function repaymentDate() {
+        var date = new Date();
+        var fridayCount = 0;
+        while (fridayCount < 2) {
+          date.setDate(date.getDate() + 1);
+          if (date.getDay() === 5) fridayCount += 1;
+        }
+        return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      }
+      function brandMarkup(page) {
+        return '<div class="' + (page ? 'page-brand ' : '') + 'ap-brand"><svg viewBox="0 0 48 42" aria-hidden="true"><path d="M5 33 C12 39 22 34 29 26 C35 20 40 21 44 25" fill="none" stroke="#22b95e" stroke-width="6" stroke-linecap="round"/><path d="M8 28 L22 6 L31 24" fill="none" stroke="#22b95e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 20 L45 25 L38 30" fill="none" stroke="#22b95e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="ap-brand-text">AnyTime<em>Pay</em></div>' + (page ? '<div class="ap-tagline">Access your pay, anytime.</div>' : '') + '</div></div>';
+      }
+
+      function home() {
+        var active = state.entitled || ['returning', 'halted', 'nudge-after'].indexOf(state.scenario) >= 0;
+        var anyTimeBody = active
+          ? '<div class="balance">' + money(state.available) + '</div><div class="balance-label">AVAILABLE EARNINGS</div><button class="link-button" data-action="open-anytime">View details &amp; transfer</button>'
+          : '<p>Access your eligible earnings before payday.</p><button class="primary" data-action="open-anytime">Get started</button>';
+        state.view = 'home';
+        main.innerHTML = '<div class="dashboard"><section class="panel" aria-label="Accounts"><h2>ACCOUNTS</h2>' +
+          '<div class="account-row"><div class="account-title">CHECKING</div><div class="balance">' + accountBalanceMarkup(state.checking) + '</div><div class="balance-label">AVAILABLE BALANCE</div></div>' +
+          '<div class="account-row"><div class="account-title">SAVINGS</div><div class="balance">$2,135<sup>03</sup></div><div class="balance-label">AVAILABLE BALANCE</div></div>' +
+          '<div class="anytime-row">' + brandMarkup(false) + '<span class="tag">EARNED PAY</span>' + anyTimeBody + '</div></section>' +
+          '<section class="panel" aria-label="Services"><h2>SERVICES</h2><div class="service-card"><div><h3>Transfer funds</h3><p>Move money between your AltaOne accounts.</p></div><button class="secondary">Transfer</button></div></section></div>';
+      }
+
+      function account(tab) {
+        tab = tab || 'details';
+        state.view = 'account';
+        state.tab = tab;
+        main.innerHTML = '<button class="back" data-action="home">&larr; Back</button><div class="page-head"><div>' + brandMarkup(true) +
+          '<div class="updated">Last updated: August 6, 2026 9:18 AM</div></div><div class="head-balance"><strong>' + money(state.available) + '</strong><span>Available Earnings</span><button class="primary" data-action="transfer">Transfer earnings</button></div></div>' +
+          '<div class="tabs"><button class="tab ' + (tab === 'transactions' ? 'active' : '') + '" data-action="transactions">Transactions</button>' +
+          '<button class="tab ' + (tab === 'details' ? 'active' : '') + '" data-action="details">Details &amp; Settings</button></div>' +
+          '<section class="account-content">' + (tab === 'transactions' ? transactionsMarkup() : detailsMarkup()) + '</section>';
+      }
+
+      function detailsMarkup() {
+        return '<div class="wellness-grid"><div class="wellness-card outlook"><div class="score-ring"><div class="score-number">67</div></div>' +
+          '<div><h3>Cash-to-Payday Outlook: Watch closely</h3><p>How likely your available cash is to last until your next expected payday.</p><span class="not-credit">This is a financial wellness indicator&mdash;not a credit score.</span><br><button class="link-button">View score details</button></div></div>' +
+          '<div class="wellness-card nudge-card"><svg class="nudge-path" viewBox="0 0 300 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 132 C42 89 64 166 94 180" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="7 7"/><path d="M232 0 C271 45 255 97 300 71" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="7 7"/></svg>' +
+          '<h3>Financial Wellness</h3><p>Simple &amp; personalized financial education to help you stay on track.</p><small>powered by nudge</small><button class="primary" data-action="open-nudge">Explore Nudge</button></div></div>' +
+          '<div class="faq-row"><span class="faq-icon">?</span><span>Have any questions? <a href="#" data-action="faq">Visit our FAQs</a></span></div>' +
+          '<div class="detail-grid"><div class="metric"><label>Available Earnings</label><span>' + money(state.available) + '</span></div><div class="metric"><label>Current Outstanding Amount</label><span>' + money(state.outstanding) + '</span></div>' +
+          '<div class="metric"><label>Year-to-Date Accessed</label><span>' + money(state.ytd) + '</span></div><div class="metric"><label>Expected Repayment</label><span>' + repaymentDate() + '</span></div>' +
+          '<div class="metric"><label>Current Pay Cycle</label><span>Earnings are updating each day until payday.</span></div><div class="metric"><label>Payroll Connection</label><span>Connected</span></div></div>';
+      }
+
+      function transactionsMarkup() {
+        var banner = state.flash ? '<div class="success-banner"><b>&#10003;</b><span>$60.00 transferred to Checking. The $4.99 fee will be assessed on ' + repaymentDate() + '.</span><button class="banner-close" data-action="dismiss-banner" aria-label="Dismiss repayment message">&times;</button></div>' : '';
+        return banner + '<table aria-label="AnyTimePay transactions"><thead><tr><th>Date</th><th>Description</th><th>Amount</th></tr></thead><tbody>' +
+          '<tr><td>Aug 6, 2026</td><td>AnyTimePay transfer to Checking &bull;&bull;&bull;&bull;0090</td><td class="debit">&minus; $60.00</td></tr>' +
+          '<tr><td>Jul 31, 2026</td><td>AnyTimePay repayment</td><td class="credit">+ $40.00</td></tr>' +
+          '<tr><td>Jul 29, 2026</td><td>AnyTimePay transfer to Checking &bull;&bull;&bull;&bull;0090</td><td class="debit">&minus; $40.00</td></tr></tbody></table>';
+      }
+
+      function nudge() {
+        state.view = 'nudge';
+        main.innerHTML = '<button class="back" data-action="home">&larr; Back</button><section class="panel nudge"><div class="nudge-mark">&#10022;</div><h1>Financial Wellness</h1>' +
+          '<p>Personalized guidance to help you build stronger everyday financial habits.</p><div class="nudge-tools"><div><strong>Learn</strong><span>Short, relevant financial lessons.</span></div><div><strong>Plan</strong><span>Turn goals into practical next steps.</span></div><div><strong>Track</strong><span>Build habits that support your goals.</span></div></div><button class="primary">Open Nudge</button><p class="not-credit">Powered by Nudge</p></section>';
+      }
+
+      function progressMarkup(current, haltAt) {
+        var halted = haltAt && current === haltAt;
+        var steps = labels.map(function (label, index) {
+          var n = index + 1;
+          var cls = n < current ? 'done' : (n === current ? (halted ? 'halted' : 'active') : '');
+          var mark = n < current ? '&#10003;' : (halted && n === current ? '!' : n);
+          return '<li class="step ' + cls + '"><span class="step-mark">' + mark + '</span><span>' + n + ' of 4 &mdash; ' + label + '</span></li>';
+        }).join('');
+        var support = halted ? '<div class="support-box"><strong>We couldn&#39;t complete your earnings check.</strong>Contact Member Support and reference <b>AP-48291</b>.<br><small>August 6, 2026 at 9:18 AM</small></div><div class="modal-actions"><button class="secondary" data-action="close-modal">Close</button></div>' : '';
+        return '<div class="overlay"><section class="modal" role="dialog" aria-modal="true"><h2>Checking your AnyTimePay availability</h2><p>This usually takes only a few moments.</p><ol class="steps">' + steps + '</ol>' + support + '</section></div>';
+      }
+
+      function progress(haltAt, fast) {
+        var current = 1;
+        var wait = fast ? 260 : 850;
+        haltAt = haltAt || 0;
+        function draw() {
+          var halted = haltAt && current === haltAt;
+          overlay.innerHTML = progressMarkup(current, haltAt);
+          if (halted) return;
+          if (current < 4) setTimeout(function () { current += 1; draw(); }, wait);
+          else setTimeout(function () { state.entitled = true; overlay.innerHTML = ''; account('details'); }, wait);
+        }
+        draw();
+      }
+
+      function staticProgress(current, haltAt) { overlay.innerHTML = progressMarkup(current || 1, haltAt || 0); }
+      function transfer() {
+        overlay.innerHTML = '<div class="overlay"><section class="modal" role="dialog" aria-modal="true"><h2>Transfer from AnyTimePay</h2><p>Move available earnings into an AltaOne account.</p><div class="transfer-grid">' +
+          '<div class="field"><label>From</label><select><option>AnyTimePay &mdash; ' + money(state.available) + ' available</option></select></div><div class="field"><label>To</label><select><option>Checking &bull;&bull;&bull;&bull;0090</option><option>Savings &bull;&bull;&bull;&bull;0001</option></select></div>' +
+          '<div class="field"><label>Amount</label><input id="ap-amount" type="text" value="$60.00"></div><div class="field"><label>Delivery</label><input type="text" value="Immediately" disabled></div></div>' +
+          '<div class="modal-actions"><button class="secondary" data-action="close-modal">Cancel</button><button class="primary" data-action="review-transfer">Review transfer</button></div></section></div>';
+      }
+
+      function reviewTransfer(accepted) {
+        var checked = accepted ? 'checked' : '';
+        var disabled = accepted ? '' : 'disabled';
+        overlay.innerHTML = '<div class="overlay"><section class="modal" role="dialog" aria-modal="true"><h2>Review AnyTimePay transfer</h2><p>Confirm the amount, fee and repayment before transferring.</p>' +
+          '<div class="review-lines"><div class="review-line"><span>Amount delivered</span><b>$60.00</b></div><div class="review-line"><span>Transaction fee</span><b>$4.99</b></div><div class="review-line total"><span>Total repayment</span><b>$64.99</b></div><div class="review-line repayment-date"><span>Repayment date</span><b>' + repaymentDate() + '</b></div></div>' +
+          '<label class="terms-check" for="ap-terms"><input id="ap-terms" type="checkbox" ' + checked + '><span>I have reviewed and agree to the <a href="#" data-action="terms">AnyTimePay Terms &amp; Conditions</a> and <a href="#" data-action="fee-disclosure">Fee Disclosure</a>.</span></label>' +
+          '<div class="modal-actions"><button class="secondary" data-action="transfer">Back</button><button class="primary" id="ap-submit-transfer" data-action="submit-transfer" ' + disabled + '>Accept and transfer $60.00</button></div></section></div>';
+      }
+
+      function submitTransfer() {
+        if (!state.transferDone) state.checking += 60;
+        state.available = 83; state.outstanding = 104.99; state.ytd = 445; state.entitled = true; state.flash = true; state.transferDone = true;
+        overlay.innerHTML = '';
+        account('transactions');
+      }
+
+      function openAnyTimePay() {
+        if (state.scenario === 'first' && !state.entitled) {
+          overlay.innerHTML = '<div class="overlay"><section class="modal" role="dialog" aria-modal="true"><div class="page-brand">' + brandMarkup(true) + '</div><h2>Access your eligible earnings before payday</h2>' +
+            '<p>Access your pay, anytime. AnyTimePay lets you move available earnings into your AltaOne account when you need them.</p><div class="modal-actions"><button class="secondary" data-action="close-modal">Not now</button><button class="primary" data-action="start-check">Check my available earnings</button></div></section></div>';
+        } else if (state.scenario === 'halted') progress(2, false);
+        else if (state.scenario === 'returning') progress(0, false);
+        else account('details');
+      }
+
+      root.addEventListener('click', function (event) {
+        var actionNode = event.target.closest('[data-action]');
+        if (!actionNode) return;
+        var action = actionNode.getAttribute('data-action');
+        if (event.target.closest('a')) event.preventDefault();
+        if (action === 'home') home();
+        else if (action === 'open-anytime') openAnyTimePay();
+        else if (action === 'start-check') progress(0, false);
+        else if (action === 'transactions') account('transactions');
+        else if (action === 'details') account('details');
+        else if (action === 'transfer') transfer();
+        else if (action === 'review-transfer') reviewTransfer(false);
+        else if (action === 'submit-transfer') submitTransfer(false);
+        else if (action === 'open-nudge') nudge();
+        else if (action === 'dismiss-banner') { state.flash = false; account('transactions'); }
+        else if (action === 'close-modal') overlay.innerHTML = '';
+      });
+
+      root.addEventListener('change', function (event) {
+        if (event.target.id === 'ap-terms') {
+          var submit = root.querySelector('#ap-submit-transfer');
+          if (submit) submit.disabled = !event.target.checked;
+        }
+      });
+
+      scenarioSelect.addEventListener('change', function (event) {
+        state.scenario = event.target.value; state.available = 143; state.outstanding = 40; state.ytd = 385; state.checking = 805.42; state.transferDone = false; state.flash = false;
+        state.entitled = ['returning', 'halted', 'nudge-after'].indexOf(state.scenario) >= 0;
+        overlay.innerHTML = '';
+        if (state.scenario.indexOf('nudge') === 0) nudge(); else home();
+      });
+
+      window.apDemo = { home: home, account: account, nudge: nudge, progress: progress, staticProgress: staticProgress, transfer: transfer, reviewTransfer: reviewTransfer, submitTransfer: submitTransfer, state: state };
+      home();
+      var scene = new URLSearchParams(location.search).get('scene');
+      var scenes = {
+        'home-first': function () { state.entitled = false; state.scenario = 'first'; home(); },
+        'welcome': function () { state.entitled = false; state.scenario = 'first'; home(); openAnyTimePay(); },
+        'progress-1': function () { home(); staticProgress(1, 0); }, 'progress-2': function () { home(); staticProgress(2, 0); },
+        'progress-3': function () { home(); staticProgress(3, 0); }, 'progress-4': function () { home(); staticProgress(4, 0); },
+        'details': function () { state.entitled = true; account('details'); }, 'transfer': function () { state.entitled = true; account('details'); transfer(); },
+        'review': function () { state.entitled = true; account('details'); reviewTransfer(true); }, 'success': function () { state.entitled = true; account('details'); submitTransfer(); },
+        'transactions': function () { state.entitled = true; state.available = 83; account('transactions'); }, 'home-active': function () { state.entitled = true; home(); },
+        'home-post-transfer': function () { state.entitled = true; state.available = 83; state.outstanding = 104.99; state.ytd = 445; state.checking = 865.42; state.transferDone = true; home(); },
+        'returning-1': function () { state.entitled = true; home(); staticProgress(1, 0); }, 'returning-2': function () { state.entitled = true; home(); staticProgress(2, 0); },
+        'returning-3': function () { state.entitled = true; home(); staticProgress(3, 0); }, 'returning-4': function () { state.entitled = true; home(); staticProgress(4, 0); },
+        'halted': function () { state.entitled = true; home(); staticProgress(2, 2); }, 'nudge-after': function () { state.entitled = true; state.scenario = 'nudge-after'; nudge(); }
+      };
+      if (scene && scenes[scene]) scenes[scene]();
+    }());
+  </script>
+</div>
